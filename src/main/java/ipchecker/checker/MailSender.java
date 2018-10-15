@@ -16,12 +16,18 @@ public class MailSender {
     private final JavaMailSender mailSender;
     private final MailClientConfiguration configuration;
 
-    public void sendMail(String ip){
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(configuration.getAddressee());
-        message.setSubject(SUBJECT);
-        message.setText("Your new IP address: " + ip);
-        mailSender.send(message);
-        log.info("Mail sent.");
+    public boolean sendMail(String ip) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(configuration.getAddressee());
+            message.setSubject(SUBJECT);
+            message.setText("Your new IP address: " + ip);
+            mailSender.send(message);
+            log.info("Mail sent.");
+        } catch (Exception e) {
+            log.warn("Error sending the mail: {}", e);
+            return false;
+        }
+        return true;
     }
 }

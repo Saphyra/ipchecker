@@ -15,15 +15,17 @@ public class Monitoring {
     private final MailSender mailSender;
 
     private String actualIp = "";
+    private boolean isSendSuccess = false;
 
     @Scheduled(fixedDelay = 120000)
     public void monitorIp() {
         log.info("Checking IP address...");
         String ip = ipQueryService.getIp();
-        if(!actualIp.equals(ip)){
+        if(!actualIp.equals(ip) || !isSendSuccess){
             log.info("IP address has been changed. Sending mail.");
             actualIp = ip;
-            mailSender.sendMail(ip);
+            isSendSuccess = false;
+            isSendSuccess = mailSender.sendMail(ip);
         }else {
             log.info("IP address has not changed.");
         }
