@@ -17,7 +17,7 @@ public class Monitoring {
     private String actualIp = "";
     private boolean isSendSuccess = false;
 
-    @Scheduled(fixedDelay = 120000)
+    @Scheduled(fixedDelay = 5 * 60 * 1000)
     public void monitorIp() {
         log.info("Checking IP address...");
         String ip = ipQueryService.getIp();
