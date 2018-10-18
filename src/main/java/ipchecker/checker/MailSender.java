@@ -21,7 +21,7 @@ public class MailSender {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(configuration.getAddressee());
             message.setSubject(SUBJECT);
-            message.setText("Your new IP address: <A href='http://" + ip +  ":9002'" + ip + "</A>");
+            message.setText("<HTML><BODY>Your new IP address: <A href='http://" + ip +  ":9002'" + ip + "</A></BODY></HTML>");
             mailSender.send(message);
             log.info("Mail sent.");
         } catch (Exception e) {
