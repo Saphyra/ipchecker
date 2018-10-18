@@ -21,7 +21,7 @@ public class MailSender {
     public boolean sendMail(String ip) {
         try {
             MimeMessage mail = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+            MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
             helper.setTo(configuration.getAddressee());
             helper.setSubject(SUBJECT);
             helper.setText("<HTML><BODY>Your new IP address: <A href='http://" + ip +  ":9002'" + ip + "</A></BODY></HTML>");
