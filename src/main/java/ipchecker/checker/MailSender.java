@@ -3,9 +3,11 @@ package ipchecker.checker;
 import ipchecker.config.MailClientConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 @RequiredArgsConstructor
@@ -18,11 +20,12 @@ public class MailSender {
 
     public boolean sendMail(String ip) {
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(configuration.getAddressee());
-            message.setSubject(SUBJECT);
-            message.setText("<HTML><BODY>Your new IP address: <A href='http://" + ip +  ":9002'" + ip + "</A></BODY></HTML>");
-            mailSender.send(message);
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+            helper.setTo(configuration.getAddressee());
+            helper.setSubject(SUBJECT);
+            helper.setText("<HTML><BODY>Your new IP address: <A href='http://" + ip +  ":9002'" + ip + "</A></BODY></HTML>");
+            mailSender.send(mail);
             log.info("Mail sent.");
         } catch (Exception e) {
             log.warn("Error sending the mail: {}", e);
