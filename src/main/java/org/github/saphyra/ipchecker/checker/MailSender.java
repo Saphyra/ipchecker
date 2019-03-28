@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 @RequiredArgsConstructor
 @Slf4j
 class MailSender {
-    private static final String SUBJECT = "Your IP address has been changed!";
+    private static final String SUBJECT = "IP address changed";
 
     private final JavaMailSender mailSender;
     private final AddresseesConfiguration addresseesConfiguration;
@@ -32,7 +32,7 @@ class MailSender {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
             helper.setTo(addressee);
             helper.setSubject(SUBJECT);
-            helper.setText("Your new IP address:\nhttp://" + ip + ":9002");
+            helper.setText(getMessage(ip));
             mailSender.send(mail);
             log.info("Mail sent.");
         } catch (Exception e) {
@@ -41,5 +41,16 @@ class MailSender {
         } finally {
             successStore.updateSentStatus(addressee, success);
         }
+    }
+
+    private String getMessage(String ip) {
+        return "IP address of the server has changed. New IP address is: " +
+            ip +
+            "\n" +
+            "SkyXplore: http://" + ip + ":9001" +
+            "\n" +
+            "Bookmarks: http://" + ip + ":9002" +
+            "\n" +
+            "Training: http://" + ip + ":9003";
     }
 }
