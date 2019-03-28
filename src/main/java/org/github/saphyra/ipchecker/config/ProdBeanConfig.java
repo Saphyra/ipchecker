@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
-@Profile("prod")
+@Profile({"prod", "preprod"})
 @Slf4j
 public class ProdBeanConfig {
     @Value("${mail.username}")
