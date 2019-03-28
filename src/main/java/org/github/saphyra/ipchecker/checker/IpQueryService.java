@@ -1,15 +1,12 @@
 package org.github.saphyra.ipchecker.checker;
 
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Service
-public class IpQueryService {
+public class IpQueryService implements IpProvider{
     private final String URL = "http://checkip.amazonaws.com";
 
     public String getIp(){
