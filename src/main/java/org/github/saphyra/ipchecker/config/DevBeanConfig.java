@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.mail.javamail.JavaMailSender;
 
 @Configuration
-@Profile("!prod")
+@Profile("dev")
 public class DevBeanConfig {
     @Bean
     public JavaMailSender javaMailSender() {
