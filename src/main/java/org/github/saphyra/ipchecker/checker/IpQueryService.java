@@ -1,4 +1,4 @@
-package ipchecker.checker;
+package org.github.saphyra.ipchecker.checker;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package ipchecker.config;
+package org.github.saphyra.ipchecker.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

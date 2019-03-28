@@ -1,4 +1,4 @@
-package ipchecker;
+package org.github.saphyra.ipchecker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

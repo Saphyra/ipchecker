@@ -1,6 +1,6 @@
-package ipchecker.checker;
+package org.github.saphyra.ipchecker.checker;
 
-import ipchecker.config.MailClientConfiguration;
+import org.github.saphyra.ipchecker.config.MailClientConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,13 +12,13 @@ import javax.mail.internet.MimeMessage;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MailSender {
+class MailSender {
     private static final String SUBJECT = "Your IP address has been changed!";
 
     private final JavaMailSender mailSender;
     private final MailClientConfiguration configuration;
 
-    public boolean sendMail(String ip) {
+    boolean sendMail(String ip) {
         try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
