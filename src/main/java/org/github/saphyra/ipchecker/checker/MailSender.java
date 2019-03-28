@@ -1,14 +1,13 @@
 package org.github.saphyra.ipchecker.checker;
 
-import javax.mail.internet.MimeMessage;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.github.saphyra.ipchecker.config.AddresseesConfiguration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.mail.internet.MimeMessage;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,7 @@ class MailSender {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
             helper.setTo(addressee);
             helper.setSubject(SUBJECT);
-            helper.setText("Your new IP address: http://" + ip + ":9002");
+            helper.setText("Your new IP address:\nhttp://" + ip + ":9002");
             mailSender.send(mail);
             log.info("Mail sent.");
         } catch (Exception e) {
