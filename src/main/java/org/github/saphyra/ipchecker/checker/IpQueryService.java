@@ -6,35 +6,32 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class IpQueryService implements IpProvider{
-    private final String URL = "http://checkip.amazonaws.com";
+public class IpQueryService implements IpProvider {
+    private static final String URL = "http://checkip.amazonaws.com";
 
-    public String getIp(){
+    public String getIp() {
         URL url = createUrl();
         InputStreamReader reader = createReader(url);
-        try(BufferedReader in = new BufferedReader(reader)){
+        try (BufferedReader in = new BufferedReader(reader)) {
             return in.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    private URL createUrl(){
+    private URL createUrl() {
         try {
             return new URL(URL);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    private InputStreamReader createReader(java.net.URL url) {
+    private InputStreamReader createReader(URL url) {
         try {
             return new InputStreamReader(url.openStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 }
